@@ -1,3 +1,4 @@
+// Author box used as example
 /*
 *-----------------------------*
 |  Author: Matias Hiltunen.   |
@@ -95,6 +96,7 @@ const Box = {
     return this.create()
   },
 };
+
 
 Box.log(
   'Author: Matias Hiltunen. Please do whatever you want to do with it.',30
