@@ -1,4 +1,4 @@
-import Box from './src/box.js'
+import Box from './src/index.js'
 
 // Pass the customization object as parameter to Box.new({}) if you want to add custom sides
 // Box.new() returns new Box object with its own properties
