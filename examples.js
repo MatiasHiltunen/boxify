@@ -8,7 +8,7 @@ const custom = {
     vertical: '*',
     padding: {
       left: 10,
-      rigth: 10,
+      right: 10,
       top: 3,
       bottom: 3,
     },

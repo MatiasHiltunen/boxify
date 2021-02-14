@@ -14,7 +14,7 @@ const Box = {
   content: null,
   padding: {
     left: 1,
-    rigth: 1,
+    right: 1,
     top: 1,
     bottom: 1,
   },
@@ -67,7 +67,7 @@ const Box = {
     return str + ' ';
   },
   create() {
-    let paddingX = this.padding.left + this.padding.rigth;
+    let paddingX = this.padding.left + this.padding.right;
     let paddingY = this.padding.top + this.padding.bottom - 1;
 
     let top = Array(this.width + paddingX).fill(this.horizontal);
@@ -100,7 +100,7 @@ const Box = {
           this.vertical +
           Array(this.padding.left + 1).join(' ') +
           this.fill() +
-          Array(this.padding.rigth + 1).join(' ') +
+          Array(this.padding.right + 1).join(' ') +
           this.vertical;
         return a;
       });
