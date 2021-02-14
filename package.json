@@ -1,0 +1,29 @@
+{
+  "name": "boxify",
+  "version": "0.0.1",
+  "description": "Wrap JavaScript string in a box and log it or use it however you like as a string. ",
+  "main": "box.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatiasHiltunen/boxify.git"
+  },
+  "keywords": [
+    "javascript",
+    "console.log",
+    "log",
+    "web",
+    "logging",
+    "box",
+    "string"
+  ],
+  "author": "Matias Hiltunen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MatiasHiltunen/boxify/issues"
+  },
+  "homepage": "https://github.com/MatiasHiltunen/boxify#readme"
+}
