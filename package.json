@@ -1,5 +1,5 @@
 {
-  "name": "boxify",
+  "name": "boxifystr",
   "version": "0.0.1",
   "description": "Wrap JavaScript string in a box and log it or use it however you like as a string. ",
   "main": "src",
