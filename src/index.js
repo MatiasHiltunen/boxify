@@ -82,27 +82,21 @@ const Box = {
     bottom = bottom.join('');
 
     let sides = Array(this.height + paddingY)
-      .fill(' ')
-      .map((a, i) => {
-        if (i === 0 || i <= this.padding.top)
-          return (
-            '\n' +
-            this.vertical +
-            Array(this.width + paddingX).join(' ') +
-            this.vertical
-          );
-
-        if (paddingY - 1 < 0 && (!this.content || this.content.length == 0)) {
-          return '';
+      .fill()
+      .map((_, i) => {
+        if (i === 0 || i <= this.padding.top) {
+          return '\n' + this.vertical + Array(this.width + paddingX).join(' ') + this.vertical;
         }
-        a =
-          '\n' +
+
+        if (paddingY - 1 < 0 && (!this.content || this.content.length == 0)) return '';
+
+        return '\n' +
           this.vertical +
           Array(this.padding.left + 1).join(' ') +
           this.fill() +
           Array(this.padding.right + 1).join(' ') +
           this.vertical;
-        return a;
+
       });
 
     sides[0] = top;
@@ -134,4 +128,4 @@ const Box = {
   },
 };
 
-export default Box
+module.exports = Box;
