@@ -1,10 +1,36 @@
 # boxify
-Wrap JavaScript string in a box and log it or use it however you like. Written just for fun to pass time while waiting.
-
+Wrap JavaScript string in a box and log it or use it however you like.
 ![Screenshot](https://github.com/MatiasHiltunen/boxify/blob/main/boxifyjs.PNG)
 
-Couldn't let this be so added some customization options:
+Install:
+
+npm i boxifystr
+
+usage:
+
 ```javascript
+const Box = require('./src/index')
+
+// Box.log() takes as arguments the text, width of the box as characters and height.
+// For now the height is determined by the character count to fit the lines inside the box so its basically useless.
+Box.log(
+  `Lorem ipsum dolor sit amet, consectetur adipiscing 
+  elit, sed do eiusmod tempor incididunt ut labore et
+  dolore magna aliqua.`,
+  40
+);
+// Logs:
+/*
+┌─────────────────────────────────────────┐
+│                                         │
+│      Lorem ipsum dolor sit amet,        │
+│  consectetur adipiscing elit, sed do    │
+│  eiusmod tempor incididunt ut labore    │
+│        et dolore magna aliqua.          │
+│                                         │
+└─────────────────────────────────────────┘
+*/
+
 // Pass the customization object as parameter to Box.new({}) if you want to add custom sides
 // Box.new() returns new Box object with its own properties
 const custom = {
@@ -60,26 +86,6 @@ Box.new({
 #               This is custom box 2                #
 #                                                   #
 #####################################################
-*/
-
-// Box.log() takes as arguments the text, width of the box as characters and height.
-// For now the height is determined by the character count to fit the lines inside the box so its basically useless.
-Box.log(
-  `Lorem ipsum dolor sit amet, consectetur adipiscing 
-  elit, sed do eiusmod tempor incididunt ut labore et
-  dolore magna aliqua.`,
-  40
-);
-// Logs:
-/*
-┌─────────────────────────────────────────┐
-│                                         │
-│      Lorem ipsum dolor sit amet,        │
-│  consectetur adipiscing elit, sed do    │
-│  eiusmod tempor incididunt ut labore    │
-│        et dolore magna aliqua.          │
-│                                         │
-└─────────────────────────────────────────┘
 */
 
 // Box.asString() returns the boxified string as a string. 
