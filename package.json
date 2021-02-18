@@ -1,6 +1,6 @@
 {
   "name": "boxifystr",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Wrap JavaScript string in a box and log it or use it however you like as a string. ",
   "main": "src",
   "scripts": {
