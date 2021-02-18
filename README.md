@@ -2,9 +2,11 @@
 Wrap JavaScript string in a box and log it or use it however you like.
 ![Screenshot](https://github.com/MatiasHiltunen/boxify/blob/main/boxifyjs.PNG)
 
-Install:
-
-npm i boxifystr
+╭───────────────────────────────────────────────────╮
+│                                                   │
+│             Install: npm i boxifystr              │
+│                                                   │
+╰───────────────────────────────────────────────────╯
 
 usage:
 
