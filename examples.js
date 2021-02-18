@@ -1,4 +1,4 @@
-const Box = require('./src/index')
+import Box from './src/index.js'
 
 // Pass the customization object as parameter to Box.new({}) if you want to add custom sides
 // Box.new() returns new Box object with its own properties
@@ -14,7 +14,7 @@ const custom = {
     },
 };
 
-const customBox = Box.new(custom);
+const customBox = Box.new(custom); // Or new Box(custom)
 customBox.log(
     `Lorem ipsum dolor sit amet, consectetur adipiscing 
     elit, sed do eiusmod tempor incididunt ut labore et
@@ -84,3 +84,57 @@ console.log(
         `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's`
     )
 );
+
+
+// Currently only default box support columns, providing custom object will most likely break it.
+// Box.columns() is static function which takes array of Box instances as an argument
+// save() method preserves the given string and after that instance of the Box can be logged with .log() method
+const a = new Box();
+a.save(`Test "save()" method. Lorem ipsum dolor sit amet, consectetur adipiscing 
+elit, sed do eiusmod tempor incididunt ut labore et
+dolore magna aliqua.`, 40);
+a.log()
+// Logs:
+/* 
+┌─────────────────────────────────────────┐
+│                                         │
+│   Test "save()" method. Lorem ipsum     │
+│      dolor sit amet, consectetur        │
+│    adipiscing elit, sed do eiusmod      │
+│     tempor incididunt ut labore et      │
+│          dolore magna aliqua.           │
+└─────────────────────────────────────────┘
+*/
+
+const b = Box.new();
+const c = new Box();
+
+b.save(
+    `Lorem ipsum dolor sit amet, consectetur adipiscing 
+  elit, sed do eiusmod tempor incididunt ut labore et
+  dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing 
+  elit, sed do eiusmod tempor incididunt ut labore et
+  dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing 
+  elit, sed do eiusmod tempor incididunt ut labore et
+  dolore magna aliqua.`,
+    50
+);
+c.save('This is just dummy filler', 15);
+
+console.log(Box.columns(a, b, c))
+// Logs:
+/* 
+┌─────────────────────────────────────────┬───────────────────────────────────────────────────┬────────────────┐
+│                                         │                                                   │                │
+│   Test "save()" method. Lorem ipsum     │     Lorem ipsum dolor sit amet, consectetur       │    This is     │
+│      dolor sit amet, consectetur        │      adipiscing elit, sed do eiusmod tempor       │  just dummy    │
+│    adipiscing elit, sed do eiusmod      │   incididunt ut labore et dolore magna aliqua.    │    filler      │
+│     tempor incididunt ut labore et      │     Lorem ipsum dolor sit amet, consectetur       │                │
+│          dolore magna aliqua.           │      adipiscing elit, sed do eiusmod tempor       │                │
+│                                         │   incididunt ut labore et dolore magna aliqua.    │                │
+│                                         │     Lorem ipsum dolor sit amet, consectetur       │                │
+│                                         │      adipiscing elit, sed do eiusmod tempor       │                │
+│                                         │   incididunt ut labore et dolore magna aliqua.    │                │
+│                                         │                                                   │                │
+└─────────────────────────────────────────┴───────────────────────────────────────────────────┴────────────────┘
+*/
