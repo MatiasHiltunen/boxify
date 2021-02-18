@@ -2,15 +2,16 @@
 Wrap JavaScript string in a box and log it or use it however you like.
 ![Screenshot](https://github.com/MatiasHiltunen/boxify/blob/main/boxifyjs.PNG)
 
+
+```javascript
+
 ╭───────────────────────────────────────────────────╮
 │                                                   │
 │             Install: npm i boxifystr              │
 │                                                   │
 ╰───────────────────────────────────────────────────╯
 
-usage:
 
-```javascript
 import Box from 'boxifystr'
 
 // Box.log() takes as arguments the text, width of the box as characters and height.
