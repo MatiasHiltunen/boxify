@@ -133,11 +133,11 @@ class Box {
   static log(text, w = 50, h = 3) {
 
     let logger = new Box()
-    console.log(logger.asString(text,w,h))
+    console.log(logger.asString(text, w, h))
 
   }
 
-   log(text, w = 50, h = 3) {
+  log(text, w = 50, h = 3) {
     if (this.#result && !text) return console.log(this.#result);
     if (!text) text = '(empty log)';
     this.#h = h;
@@ -174,7 +174,7 @@ class Box {
 
   static asString(text, w = 50, h = 3) {
     let logger = new Box()
-    return logger.asString(text,w,h)
+    return logger.asString(text, w, h)
   }
 
   static #joinToRight(leftBox, rightBox) {
@@ -183,7 +183,7 @@ class Box {
     if (typeof leftBox != 'string') {
       leftBox = leftBox.asString();
     }
-    
+
     return leftBox
       .split('\n')
       .map((a, i) => {
@@ -197,7 +197,7 @@ class Box {
       .join('\n');
   }
 
-  static columns(start, ...args) {
+  static columnsFromBoxes(start, ...args) {
     let maxHeight = start.height;
     args.forEach((a) => {
       if (maxHeight < a.height) maxHeight = a.height;
@@ -206,6 +206,29 @@ class Box {
     start.save(start.originalContent, null, maxHeight);
 
     return args.reduce((a, c) => {
+      c.save(c.originalContent, null, maxHeight);
+
+      a = this.#joinToRight(a, c);
+      return a;
+    }, start);
+  }
+
+  static columns(...args) {
+    let maxHeight = 0;
+
+    const arr = args.map(a => {
+      if (typeof a !== 'string') a.toString()
+      let b = new Box()
+      b.save(a)
+      if (maxHeight < b.height) maxHeight = b.height;
+      return b
+    })
+
+    let start = arr.shift()
+
+    start.save(start.originalContent, null, maxHeight);
+
+    return arr.reduce((a, c) => {
       c.save(c.originalContent, null, maxHeight);
 
       a = this.#joinToRight(a, c);

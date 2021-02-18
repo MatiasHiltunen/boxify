@@ -1,5 +1,24 @@
 import Box from './src/index.js'
 
+// Box.log() takes as arguments the text, width of the box as characters and height.
+// For now the height is determined by the character count to fit the lines inside the box so its basically useless.
+Box.log(
+    `Lorem ipsum dolor sit amet, consectetur adipiscing 
+    elit, sed do eiusmod tempor incididunt ut labore et
+    dolore magna aliqua.`
+);
+// Logs:
+/*
+┌─────────────────────────────────────────┐
+│                                         │
+│      Lorem ipsum dolor sit amet,        │
+│  consectetur adipiscing elit, sed do    │
+│  eiusmod tempor incididunt ut labore    │
+│        et dolore magna aliqua.          │
+│                                         │
+└─────────────────────────────────────────┘
+*/
+
 // Pass the customization object as parameter to Box.new({}) if you want to add custom sides
 // Box.new() returns new Box object with its own properties
 const custom = {
@@ -57,25 +76,7 @@ Box.new({
 #####################################################
 */
 
-// Box.log() takes as arguments the text, width of the box as characters and height.
-// For now the height is determined by the character count to fit the lines inside the box so its basically useless.
-Box.log(
-    `Lorem ipsum dolor sit amet, consectetur adipiscing 
-    elit, sed do eiusmod tempor incididunt ut labore et
-    dolore magna aliqua.`,
-    40
-);
-// Logs:
-/*
-┌─────────────────────────────────────────┐
-│                                         │
-│      Lorem ipsum dolor sit amet,        │
-│  consectetur adipiscing elit, sed do    │
-│  eiusmod tempor incididunt ut labore    │
-│        et dolore magna aliqua.          │
-│                                         │
-└─────────────────────────────────────────┘
-*/
+
 
 // Box.asString() returns the boxified string as a string. 
 // Can be used for example with html <pre> tags to preserve the box form
@@ -87,9 +88,26 @@ console.log(
 
 
 // Currently only default box support columns, providing custom object will most likely break it.
-// Box.columns() is static function which takes array of Box instances as an argument
-// save() method preserves the given string and after that instance of the Box can be logged with .log() method
+// Box.columns() is static function which takes n number of strings as an arguments
+
+console.log(Box.columns("Column 1", "Column 2", "Currently only default box support columns, providing custom object will most likely break it. Box.columns() is static function which takes n number of strings as an arguments"))
+// Logs:
+/* 
+┌───────────────────────────────────────────────────┬───────────────────────────────────────────────────┬───────────────────────────────────────────────────┐
+│                                                   │                                                   │                                                   │
+│                     Column 1                      │                     Column 2                      │   Currently only default box support columns,     │
+│                                                   │                                                   │  providing custom object will most likely break   │
+│                                                   │                                                   │    it. Box.columns() is static function which     │
+│                                                   │                                                   │    takes n number of strings as an arguments      │
+│                                                   │                                                   │                                                   │
+└───────────────────────────────────────────────────┴───────────────────────────────────────────────────┴───────────────────────────────────────────────────┘
+*/
+
+
+// Box.columnsFromBoxes() static function takes n number Box instances as an argument
+// columnsFromBoxes gives more options for customization of the columns
 const a = new Box();
+// save() method preserves the given string and can be later logged with .log() method
 a.save(`Test "save()" method. Lorem ipsum dolor sit amet, consectetur adipiscing 
 elit, sed do eiusmod tempor incididunt ut labore et
 dolore magna aliqua.`, 40);
@@ -121,7 +139,7 @@ b.save(
 );
 c.save('This is just dummy filler', 15);
 
-console.log(Box.columns(a, b, c))
+console.log(Box.columnsFromBoxes(a, b, c))
 // Logs:
 /* 
 ┌─────────────────────────────────────────┬───────────────────────────────────────────────────┬────────────────┐
