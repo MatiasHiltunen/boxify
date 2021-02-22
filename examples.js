@@ -63,10 +63,11 @@ customBox.log(
 
 // Quick way to create new custom box
 Box.new({
-    corners: ['#', '#', '#', '#'],
-    horizontal: '#',
-    vertical: '#',
-}).log("This is custom box 2")
+    corners: ['[', ']', '[', ']'],
+    horizontal: '=',
+    vertical: ':',
+    width: 40
+}).log("This is custom box 2 Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur")
 // Logs:
 /*
 #####################################################
@@ -90,27 +91,47 @@ console.log(
 // Currently only default box support columns, providing custom object will most likely break it.
 // Box.columns() is static function which takes n number of strings as an arguments
 
-console.log(Box.columns("Column 1", "Column 2", "Currently only default box support columns, providing custom object will most likely break it. Box.columns() is static function which takes n number of strings as an arguments"))
+console.log(
+    Box.columns(
+        "Column 1",
+        "Column 2",
+        `Currently only default box support columns, 
+        providing custom object will most likely break it. 
+        Box.columns() is static function which takes n number of strings as an arguments`,
+    ),
+)
+
 // Logs:
 /* 
-┌───────────────────────────────────────────────────┬───────────────────────────────────────────────────┬───────────────────────────────────────────────────┐
-│                                                   │                                                   │                                                   │
-│                     Column 1                      │                     Column 2                      │   Currently only default box support columns,     │
-│                                                   │                                                   │  providing custom object will most likely break   │
-│                                                   │                                                   │    it. Box.columns() is static function which     │
-│                                                   │                                                   │    takes n number of strings as an arguments      │
-│                                                   │                                                   │                                                   │
-└───────────────────────────────────────────────────┴───────────────────────────────────────────────────┴───────────────────────────────────────────────────┘
+┌──────────┬──────────┬────────────────┐
+│          │          │                │
+│          │          │ Currently only │
+│          │          │  default box   │
+│          │          │    support     │
+│          │          │   columns,     │
+│          │          │   providing    │
+│          │          │ custom object  │
+│          │          │   will most    │
+│ Column 1 │ Column 2 │ likely break   │
+│          │          │      it.       │
+│          │          │ Box.columns()  │
+│          │          │   is static    │
+│          │          │ function which │
+│          │          │ takes n number │
+│          │          │ of strings as  │
+│          │          │ an arguments   │
+│          │          │                │
+└──────────┴──────────┴────────────────┘
 */
 
-
+console.log(Box.columns("ports:", 8000, 8080))
 // Box.columnsFromBoxes() static function takes n number Box instances as an argument
 // columnsFromBoxes gives more options for customization of the columns
 const a = new Box();
 // save() method preserves the given string and can be later logged with .log() method
-a.save(`Test "save()" method. Lorem ipsum dolor sit amet, consectetur adipiscing 
+a.save(`Test "save()" method. Lorem ipsum dolor sit amet consectetur adipiscing 
 elit, sed do eiusmod tempor incididunt ut labore et
-dolore magna aliqua.`, 40);
+dolore magna aliqua. dfvdfvdfv ldkmlkfm öflg,öl, fgbfgbfb`, 50);
 a.log()
 // Logs:
 /* 
@@ -130,18 +151,14 @@ const c = new Box();
 b.save(
     `Lorem ipsum dolor sit amet, consectetur adipiscing 
   elit, sed do eiusmod tempor incididunt ut labore et
-  dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing 
-  elit, sed do eiusmod tempor incididunt ut labore et
-  dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing 
-  elit, sed do eiusmod tempor incididunt ut labore et
-  dolore magna aliqua.`,
+  dolore magna aliqua. `,
     50
 );
 c.save('This is just dummy filler', 15);
 
 console.log(Box.columnsFromBoxes(a, b, c))
 // Logs:
-/* 
+/*
 ┌─────────────────────────────────────────┬───────────────────────────────────────────────────┬────────────────┐
 │                                         │                                                   │                │
 │   Test "save()" method. Lorem ipsum     │     Lorem ipsum dolor sit amet, consectetur       │    This is     │

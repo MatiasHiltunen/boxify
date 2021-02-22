@@ -1,10 +1,10 @@
 {
   "name": "boxifystr",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "description": "Wrap JavaScript string in a box and log it or use it however you like as a string. ",
   "main": "src",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/MatiasHiltunen/boxify/issues"
   },
-  "homepage": "https://github.com/MatiasHiltunen/boxify#readme"
+  "homepage": "https://github.com/MatiasHiltunen/boxify#readme",
+  "devDependencies": {
+    "mocha": "^8.3.0"
+  }
 }
