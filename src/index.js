@@ -1,3 +1,5 @@
+import templateBox from '../native/index.js'
+
 class Box {
   #corners;
   #horizontal;
@@ -346,6 +348,14 @@ class Box {
 
   static new(custom) {
     return new Box(custom);
+  }
+
+  static t(val) {
+    return templateBox(val)
+  }
+
+  static tLog(val) {
+    console.log(templateBox(val))
   }
 }
 

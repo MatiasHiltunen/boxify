@@ -14,6 +14,41 @@ Wrap JavaScript string in a box and log it or use it however you like.
 
 import Box from 'boxifystr'
 
+// Box.tLog() wraps the template string in a default box and logs it
+// tLog and t methods are implemented as node's native addons using neon-bindings with rust
+Box.tLog(
+`
+         Box.tLog() wraps the template string in a default box and logs it    
+        Lorem ipsum dolor 
+  sit amet, c             onsectetur adipiscing 
+    elit, sed do eiusmod                tempor incididunt ut labore et  
+ dolore              magna aliqua.
+
+`)
+
+// Logs: 
+/* 
+┌──────────────────────────────────────────────────────────────────────────────┐
+|                                                                              |
+|         Box.tLog() wraps the template string in a default box and logs it    |
+|        Lorem ipsum dolor                                                     |
+|  sit amet, c             onsectetur adipiscing                               |
+|    elit, sed do eiusmod                tempor incididunt ut labore et        |
+| dolore              magna aliqua.                                            |
+|                                                                              |
+└──────────────────────────────────────────────────────────────────────────────┘
+*/
+
+console.log(Box.t(
+`
+         Box.t() wraps the template string in a default box and returns it as a string   
+        Lorem ipsum dolor 
+  sit amet, c             onsectetur adipiscing 
+    elit, sed do eiusmod                tempor incididunt ut labore et  
+ dolore              magna aliqua.
+
+`))
+
 // Box.log() takes as arguments the text, width of the box as characters and height.
 // For now the height is determined by the character count to fit the lines inside the box so its basically useless.
 Box.log(
