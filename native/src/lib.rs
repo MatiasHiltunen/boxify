@@ -51,16 +51,12 @@ fn form_wrap(s: String) -> String {
     r
 }
 
-pub fn default_args(mut cx: FunctionContext) -> JsResult<JsString> {
+pub fn export_box(mut cx: FunctionContext) -> JsResult<JsString> {
     let test = match cx.argument_opt(0) {
         Some(arg) => arg.downcast::<JsString>().or_throw(&mut cx)?.value(),
-        // Default to 12 if no value is given
         None => "empty".to_string(),
     };
-
-    // println!("{}",form_wrap(test));
-
     Ok(cx.string(form_wrap(test)))
 }
 
-register_module!(mut m, { m.export_function("defaultArgs", default_args) });
+register_module!(mut m, { m.export_function("export_box", export_box) });
