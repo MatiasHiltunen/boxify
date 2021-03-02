@@ -1,4 +1,10 @@
 import fs from 'fs'
+import path from 'path'
+
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 var wasm;
 
@@ -65,12 +71,13 @@ const moduleImports = {
 }
 
 function init() {
-    return WebAssembly.compile(fs.readFileSync('./wasm/output.wasm'))
+    return WebAssembly.compile(fs.readFileSync(path.join(__dirname, '/output.wasm')))
         .then(buffer => WebAssembly.instantiate(buffer, { './rustc_h_xgn26az6una': moduleImports }))
         .then((wasmModule) => {
             wasm = init.wasm = wasmModule.exports;
             return;
         });
 };
+
 
 export default Object.assign(init, moduleImports);
