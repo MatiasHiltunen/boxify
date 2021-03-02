@@ -14,40 +14,7 @@ Wrap JavaScript string in a box and log it or use it however you like.
 
 import Box from 'boxifystr'
 
-// Box.tLog() wraps the template string in a default box and logs it
-// tLog and t methods are implemented as node's native addons using neon-bindings with rust
-Box.tLog(
-`
-         Box.tLog() wraps the template string in a default box and logs it    
-        Lorem ipsum dolor 
-  sit amet, c             onsectetur adipiscing 
-    elit, sed do eiusmod                tempor incididunt ut labore et  
- dolore              magna aliqua.
-
-`)
-
-// Logs: 
-/* 
-┌──────────────────────────────────────────────────────────────────────────────┐
-|                                                                              |
-|         Box.tLog() wraps the template string in a default box and logs it    |
-|        Lorem ipsum dolor                                                     |
-|  sit amet, c             onsectetur adipiscing                               |
-|    elit, sed do eiusmod                tempor incididunt ut labore et        |
-| dolore              magna aliqua.                                            |
-|                                                                              |
-└──────────────────────────────────────────────────────────────────────────────┘
-*/
-
-console.log(Box.t(
-`
-         Box.t() wraps the template string in a default box and returns it as a string   
-        Lorem ipsum dolor 
-  sit amet, c             onsectetur adipiscing 
-    elit, sed do eiusmod                tempor incididunt ut labore et  
- dolore              magna aliqua.
-
-`))
+/* Box.t and Box.tLog has been removed as native binaries for each platform grows the size of the bundle way too big */
 
 // Box.log() takes as arguments the text, width of the box as characters and height.
 // For now the height is determined by the character count to fit the lines inside the box so its basically useless.
@@ -112,10 +79,11 @@ customBox.log(
 
 // Quick way to create new custom box
 Box.new({
-    corners: ['#', '#', '#', '#'],
-    horizontal: '#',
-    vertical: '#',
-}).log("This is custom box 2")
+    corners: ['[', ']', '[', ']'],
+    horizontal: '=',
+    vertical: ':',
+    width: 40
+}).log("This is custom box 2 Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur")
 // Logs:
 /*
 #####################################################
@@ -139,27 +107,47 @@ console.log(
 // Currently only default box support columns, providing custom object will most likely break it.
 // Box.columns() is static function which takes n number of strings as an arguments
 
-console.log(Box.columns("Column 1", "Column 2", "Currently only default box support columns, providing custom object will most likely break it. Box.columns() is static function which takes n number of strings as an arguments"))
+console.log(
+    Box.columns(
+        "Column 1",
+        "Column 2",
+        `Currently only default box support columns, 
+        providing custom object will most likely break it. 
+        Box.columns() is static function which takes n number of strings as an arguments`,
+    ),
+)
+
 // Logs:
 /* 
-┌───────────────────────────────────────────────────┬───────────────────────────────────────────────────┬───────────────────────────────────────────────────┐
-│                                                   │                                                   │                                                   │
-│                     Column 1                      │                     Column 2                      │   Currently only default box support columns,     │
-│                                                   │                                                   │  providing custom object will most likely break   │
-│                                                   │                                                   │    it. Box.columns() is static function which     │
-│                                                   │                                                   │    takes n number of strings as an arguments      │
-│                                                   │                                                   │                                                   │
-└───────────────────────────────────────────────────┴───────────────────────────────────────────────────┴───────────────────────────────────────────────────┘
+┌──────────┬──────────┬────────────────┐
+│          │          │                │
+│          │          │ Currently only │
+│          │          │  default box   │
+│          │          │    support     │
+│          │          │   columns,     │
+│          │          │   providing    │
+│          │          │ custom object  │
+│          │          │   will most    │
+│ Column 1 │ Column 2 │ likely break   │
+│          │          │      it.       │
+│          │          │ Box.columns()  │
+│          │          │   is static    │
+│          │          │ function which │
+│          │          │ takes n number │
+│          │          │ of strings as  │
+│          │          │ an arguments   │
+│          │          │                │
+└──────────┴──────────┴────────────────┘
 */
 
-
+console.log(Box.columns("ports:", 8000, 8080))
 // Box.columnsFromBoxes() static function takes n number Box instances as an argument
 // columnsFromBoxes gives more options for customization of the columns
 const a = new Box();
 // save() method preserves the given string and can be later logged with .log() method
-a.save(`Test "save()" method. Lorem ipsum dolor sit amet, consectetur adipiscing 
+a.save(`Test "save()" method. Lorem ipsum dolor sit amet consectetur adipiscing 
 elit, sed do eiusmod tempor incididunt ut labore et
-dolore magna aliqua.`, 40);
+dolore magna aliqua. dfvdfvdfv ldkmlkfm öflg,öl, fgbfgbfb`, 50);
 a.log()
 // Logs:
 /* 
@@ -179,18 +167,14 @@ const c = new Box();
 b.save(
     `Lorem ipsum dolor sit amet, consectetur adipiscing 
   elit, sed do eiusmod tempor incididunt ut labore et
-  dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing 
-  elit, sed do eiusmod tempor incididunt ut labore et
-  dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing 
-  elit, sed do eiusmod tempor incididunt ut labore et
-  dolore magna aliqua.`,
+  dolore magna aliqua. `,
     50
 );
 c.save('This is just dummy filler', 15);
 
 console.log(Box.columnsFromBoxes(a, b, c))
 // Logs:
-/* 
+/*
 ┌─────────────────────────────────────────┬───────────────────────────────────────────────────┬────────────────┐
 │                                         │                                                   │                │
 │   Test "save()" method. Lorem ipsum     │     Lorem ipsum dolor sit amet, consectetur       │    This is     │
@@ -206,4 +190,47 @@ console.log(Box.columnsFromBoxes(a, b, c))
 └─────────────────────────────────────────┴───────────────────────────────────────────────────┴────────────────┘
 */
 
-```
+// Box.initAsyncTemplateBox instantiates wasm module in the backgound
+;(async ()=>{
+    const asyncBox = await Box.initAsyncTemplateBox()
+    console.log(asyncBox(`
+    +       +       +           +   ++      +++++++
+     -- - ---             ---  ---   ---- -- -- ---- -       
+     _____________                ________ ----
+    `))
+})()
+// Logs:
+/* 
+┌────────────────────────────────────────────────────────────────┐
+|                                                                |
+|    +       +       +           +   ++      +++++++             |
+|     -- - ---             ---  ---   ---- -- -- ---- -          |
+|     _____________                ________ ----                 |
+|                                                                |
+└────────────────────────────────────────────────────────────────┘
+*/
+
+
+Box.asyncString(
+    `
+    Both Box.initAsyncTemplateBox and Box.asyncString   
+    uses WASM to generate the box.
+
+                Box.asyncString() wraps the template
+                string in a default box 
+                and returns it async as a string   
+    
+`).then(console.log)
+// Logs:
+/* 
+┌────────────────────────────────────────────────────────┐
+|                                                        |
+|    Both Box.initAsyncTemplateBox and Box.asyncString   |
+|    uses WASM to generate the box.                      |
+|                                                        |
+|                Box.asyncString() wraps the template    |
+|                string in a default box                 |
+|                and returns it async as a string        |
+|                                                        |
+└────────────────────────────────────────────────────────┘
+*/

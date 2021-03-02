@@ -1,4 +1,10 @@
-import templateBox from '../native/index.js'
+import wasm_bindgen from '../wasm/wasm_bindgen.js'
+
+const b = (async ()=>{
+  await wasm_bindgen()
+  return wasm_bindgen.boxify
+})()
+
 
 class Box {
   #corners;
@@ -350,12 +356,16 @@ class Box {
     return new Box(custom);
   }
 
-  static t(val) {
-    return templateBox(val)
+  static async asyncString(val) {
+    return (await b)(val)
   }
 
-  static tLog(val) {
-    console.log(templateBox(val))
+  static async asyncLog(val) {
+    console.log((await b)(val))
+  }
+
+  static async initAsyncTemplateBox() {
+    return await b
   }
 }
 

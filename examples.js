@@ -1,40 +1,6 @@
 import Box from './src/index.js'
 
-// Box.tLog() wraps the template string in a default box and logs it
-Box.tLog(
-`
-         Box.tLog() wraps the template string in a default box and logs it    
-        Lorem ipsum dolor 
-  sit amet, c             onsectetur adipiscing 
-    elit, sed do eiusmod                tempor incididunt ut labore et  
- dolore              magna aliqua.
-
-`)
-
-// Logs: 
-/* 
-┌──────────────────────────────────────────────────────────────────────────────┐
-|                                                                              |
-|         Box.tLog() wraps the template string in a default box and logs it    |
-|        Lorem ipsum dolor                                                     |
-|  sit amet, c             onsectetur adipiscing                               |
-|    elit, sed do eiusmod                tempor incididunt ut labore et        |
-| dolore              magna aliqua.                                            |
-|                                                                              |
-└──────────────────────────────────────────────────────────────────────────────┘
-*/
-
-console.log(Box.t(
-`
-         Box.t() wraps the template string in a default box and returns it as a string   
-        Lorem ipsum dolor 
-  sit amet, c             onsectetur adipiscing 
-    elit, sed do eiusmod                tempor incididunt ut labore et  
- dolore              magna aliqua.
-
-`))
-
-
+/* Box.t and Box.tLog has been removed as native binaries for each platform grows the size of the bundle way too big */
 
 // Box.log() takes as arguments the text, width of the box as characters and height.
 // For now the height is determined by the character count to fit the lines inside the box so its basically useless.
@@ -208,4 +174,49 @@ console.log(Box.columnsFromBoxes(a, b, c))
 │                                         │   incididunt ut labore et dolore magna aliqua.    │                │
 │                                         │                                                   │                │
 └─────────────────────────────────────────┴───────────────────────────────────────────────────┴────────────────┘
+*/
+
+// Box.initAsyncTemplateBox instantiates wasm module in the backgound
+;(async ()=>{
+    const asyncBox = await Box.initAsyncTemplateBox()
+    console.log(asyncBox(`
+    +       +       +           +   ++      +++++++
+     -- - ---             ---  ---   ---- -- -- ---- -       
+     _____________                ________ ----
+    `))
+})()
+// Logs:
+/* 
+┌────────────────────────────────────────────────────────────────┐
+|                                                                |
+|    +       +       +           +   ++      +++++++             |
+|     -- - ---             ---  ---   ---- -- -- ---- -          |
+|     _____________                ________ ----                 |
+|                                                                |
+└────────────────────────────────────────────────────────────────┘
+*/
+
+
+Box.asyncString(
+    `
+    Both Box.initAsyncTemplateBox and Box.asyncString   
+    uses WASM to generate the box.
+
+                Box.asyncString() wraps the template
+                string in a default box 
+                and returns it async as a string   
+    
+`).then(console.log)
+// Logs:
+/* 
+┌────────────────────────────────────────────────────────┐
+|                                                        |
+|    Both Box.initAsyncTemplateBox and Box.asyncString   |
+|    uses WASM to generate the box.                      |
+|                                                        |
+|                Box.asyncString() wraps the template    |
+|                string in a default box                 |
+|                and returns it async as a string        |
+|                                                        |
+└────────────────────────────────────────────────────────┘
 */
